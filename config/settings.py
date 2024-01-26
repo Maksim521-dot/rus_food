@@ -8,8 +8,8 @@ load_dotenv()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY', default=get_random_secret_key())
-DEBUG = False
-ALLOWED_HOSTS = ['localhost', '84.201.167.141']
+DEBUG = True
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -59,26 +59,26 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
+# if DEBUG:
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': os.environ.get(
-                'DB_ENGINE', default='django.db.backends.postgresql'
-            ),
-            'NAME': os.environ.get('DB_NAME', default='postgres'),
-            'USER': os.environ.get('POSTGRES_USER', default='postgres'),
-            'PASSWORD': os.environ.get('POSTGRES_PASSWORD', default='postgres'),
-            'HOST': os.environ.get('DB_HOST', default='db'),
-            'PORT': os.environ.get('DB_PORT', default=5432),
-        }
-    }
+}
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': os.environ.get(
+#                 'DB_ENGINE', default='django.db.backends.postgresql'
+#             ),
+#             'NAME': os.environ.get('DB_NAME', default='postgres'),
+#             'USER': os.environ.get('POSTGRES_USER', default='postgres'),
+#             'PASSWORD': os.environ.get('POSTGRES_PASSWORD', default='postgres'),
+#             'HOST': os.environ.get('DB_HOST', default='127.0.0.1'),
+#             'PORT': os.environ.get('DB_PORT', default=5432),
+#         }
+#     }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
